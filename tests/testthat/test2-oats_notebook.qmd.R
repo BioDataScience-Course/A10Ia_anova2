@@ -171,7 +171,7 @@ test_that("Chunks 'oatsposthoc', 'oatsposthoccomment' : Comparaisons multiples p
 })
 
 test_that("Chunks 'oatsqqplot', 'oatsqqplotcomment' : vérification de la normalité des résidus", {
-  expect_true(is_identical_to_ref("oatsplot"))
+  expect_true(is_identical_to_ref("oatsqqplot"))
   # Le graphique quantile-quantile produit par le chunk 'oatsqqplot' n'est pas
   # celui attendu.
   # Vérifiez le graphique réalisé dans ce chunk.

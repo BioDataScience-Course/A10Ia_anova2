@@ -26,10 +26,10 @@ Les données proviennent de @yates1935. Ce tableau contient les variables :
 
 -   `B` qui est renommé en `block`, six parcelles subdivisées en quatre sous-parcelles,
 -   `V` renommé en `variety`, la variété d'avoine dont on ne garde que `"Golben.rain"`,
--   `N` renommé en  `nitrogen`, la quantité d'azote ajouté sous forme d'engrais en cwt/acre qui est convertie en tonnes par hectare et transformée en variable facteur (quatre niveaux).
+-   `N` renommé en `nitrogen`, la quantité d'azote ajouté sous forme d'engrais en cwt/acre qui est convertie en tonnes par hectare et transformée en variable facteur (quatre niveaux).
 -   `Y` renommé en `yield`, rendement de l'avoine en 1/4 livres/acre qui est converti en tonnes par hectare.
 
-L'analyse est réalisée avec le logiciel R (`r R.version.string`) et en particulier les packages {inferit} version `r packageVersion("inferit")` et {modelit} version `r packageVersion("modelit")` dans la [SciViews Box 2023](https://www.sciviews.org/software/svbox/). [Saturn Cloud](https://saturncloud.io/) (Linux Ubuntu 22.04) est utilisé pour exécuter le code et compiler la version HTML de ce bloc-notes.
+L'analyse est réalisée avec le logiciel R (`r R.version.string`) et en particulier les packages {inferit} version `r packageVersion("inferit")` et {modelit} version `r packageVersion("modelit")` dans la [SciViews Box 2024](https://www.sciviews.org/software/svbox/). [Saturn Cloud](https://saturncloud.io/) (Linux Ubuntu 22.04) est utilisé pour exécuter le code et compiler la version HTML de ce bloc-notes.
 
 Le seuil $\alpha$ de tous les tests est fixé à l'avance à 5%.
 
@@ -92,7 +92,7 @@ select_answer(r"-{
 
 <!--% Réalisez un graphique en nuage de points du rendement en fonction de la dose d'engrais azoté tout en représentant les différents blocs en sous-graphiques séparés. -->
 
-```{r oatsplot, record='RNP', arg='labels'}
+```{r oatsplot, record='RNCS'}
 ___(data = ___, ___ ~ ___) +
   ___()
 ```
@@ -108,14 +108,13 @@ select_answer(r"-{
 [] -   Le rendement semble diminuer avec la dose d'engrais.}-")
 ```
 
-
 ### ANOVA
 
 Nous ajustons une ANOVA à deux facteurs de type split-plot en considérant un décalage de rendement dû à la parcelle (effet aléatoire).
 
 <!--% Complétez l'instruction suivante pour calculer votre ANOVA à deux facteurs selon un modèle split-plot. Déterminez judicieusement XFACTOR1 et XFACTOR2 ainsi que facteurs fixes ou aléatoires. Affichez ensuite le tableau de l'ANOVA formaté avec `tabularise()` pour le facteur fixe. -->
 
-```{r oatsanova, record='ROMD5', object='oats_lmer'}
+```{r oatsanova, warning=FALSE, record='ROMD5', object='oats_lmer'}
 oats_lmer <- ___(data = ___, ___ ~ ___)
 ___(oats_lmer) %>.%
   tabularise(.)
@@ -161,7 +160,6 @@ select_answer(r"-{
 [] -   Les intervalles de confiance à 95% pour l'azote nous indiquent que l'effet est négligeable.}-")
 ```
 
-
 ## Tests post-hoc
 
 Un test de comparaison multiple est réalisé pour déterminer les différences significatives entre les doses d'azote.
@@ -185,7 +183,6 @@ select_answer(r"-{
 [] -   La concentration en azote de 0.53 t/ha donne des rendements significativement meilleurs que 0.33 t/ha.
 [] -   La concentration en azote de 0.33 t/ha donne des rendements significativement meilleurs que 0.13 t/ha.}-")
 ```
-
 
 ### Analyse des résidus du modèle
 
@@ -212,7 +209,7 @@ select_answer(r"-{
 
 <!--% Vérifiez la répartition générale des résidus avec un graphique des résidus du modèle. -->
 
-```{r oatsresid, record='RNP', arg='labels'}
+```{r oatsresid, record='RNCS'}
 oats_lmer %>.%
   ___(___(.), .resid ~ .fitted) +
   ___() +
@@ -228,7 +225,6 @@ select_answer(r"-{
 [] -   La distribution des résidus n'est pas optimale, mais elle ne montre pas non plus de tendance particulièrement problématique. Notre modèle reste valable.
 [] -   La distribution des résidus est très mauvaise. Notre modèle n'est pas utilisable.}-")
 ```
-
 
 ## Discussion et conclusions
 
