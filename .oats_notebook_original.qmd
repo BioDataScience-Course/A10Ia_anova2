@@ -29,7 +29,7 @@ Les données proviennent de @yates1935. Ce tableau contient les variables :
 -   `N` renommé en `nitrogen`, la quantité d'azote ajouté sous forme d'engrais en cwt/acre qui est convertie en tonnes par hectare et transformée en variable facteur (quatre niveaux).
 -   `Y` renommé en `yield`, rendement de l'avoine en 1/4 livres/acre qui est converti en tonnes par hectare.
 
-L'analyse est réalisée avec le logiciel R (`r R.version.string`) et en particulier les packages {inferit} version `r packageVersion("inferit")` et {modelit} version `r packageVersion("modelit")` dans la [SciViews Box 202](https://www.sciviews.org/software/svbox/)5. [Saturn Cloud](https://saturncloud.io/) (Linux Ubuntu 22.04) est utilisé pour exécuter le code et compiler la version HTML de ce bloc-notes.
+L'analyse est réalisée avec le logiciel R (`r R.version.string`) et en particulier les packages {inferit} version `r packageVersion("inferit")` et {modelit} version `r packageVersion("modelit")` dans la [SciViews Box 2025](https://www.sciviews.org/software/svbox/). [Saturn Cloud](https://saturncloud.io/) (Linux Ubuntu 22.04) est utilisé pour exécuter le code et compiler la version HTML de ce bloc-notes.
 
 Le seuil $\alpha$ de tous les tests est fixé à l'avance à 5%.
 
@@ -117,7 +117,7 @@ Nous ajustons une ANOVA à deux facteurs de type split-plot en considérant un d
 
 <!--% Complétez l'instruction suivante pour calculer votre ANOVA à deux facteurs selon un modèle split-plot. Déterminez judicieusement XFACTOR1 et XFACTOR2 ainsi que facteurs fixes ou aléatoires. Affichez ensuite le tableau de l'ANOVA formaté avec `tabularise()` pour le facteur fixe. -->
 
-```{r oatsanova, warning=FALSE, record='ROMD5', object='oats_lmer'}
+```{r oatsanova, warning=FALSE, record='ROA', object='oats_lmer', arg='call'}
 oats_lmer <- ___(data = ___, ___ ~ ___)
 ___(oats_lmer) %>.%
   tabularise(.)
@@ -140,7 +140,7 @@ Voici les intervalles de confiance à 95% sur les paramètres du modèle :
 
 <!--% Calculez les intervalles de confiance à 95% du modèle. -->
 
-```{r oatsconfint, record='RNMD5'}
+```{r oatsconfint, record='RNA', arg='dimnames'}
 ___(oats_lmer)
 ```
 
@@ -212,7 +212,7 @@ select_answer(r"-{
 
 <!--% Vérifiez la répartition générale des résidus avec un graphique des résidus du modèle. -->
 
-```{r oatsresid, record='RNCS'}
+```{r oatsresid, record='RNCS', arg='no.data'}
 oats_lmer %>.%
   ___(___(.), .resid ~ .fitted) +
   ___() +

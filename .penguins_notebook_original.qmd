@@ -26,7 +26,7 @@ Votre but est de mettre en évidence la différence de masse entre les trois esp
 
 Les données sont disponibles dans le package R {palmerpenguins}, `penguins`. Voir `?palmerpenguins::penguins` pour plus d'informations.
 
-L'analyse est réalisée avec le logiciel R (`r R.version.string`) et en particulier les packages {inferit} version `r packageVersion("inferit")` et {modelit} version `r packageVersion("modelit")` dans la [SciViews Box 202](https://www.sciviews.org/software/svbox/)5. [Saturn Cloud](https://saturncloud.io/) (Linux Ubuntu 22.04) est utilisé pour exécuter le code et compiler la version HTML de ce bloc-notes.
+L'analyse est réalisée avec le logiciel R (`r R.version.string`) et en particulier les packages {inferit} version `r packageVersion("inferit")` et {modelit} version `r packageVersion("modelit")` dans la [SciViews Box 2025](https://www.sciviews.org/software/svbox/). [Saturn Cloud](https://saturncloud.io/) (Linux Ubuntu 22.04) est utilisé pour exécuter le code et compiler la version HTML de ce bloc-notes.
 
 Le seuil $\alpha$ de tous les tests est fixé à l'avance à 5%.
 
