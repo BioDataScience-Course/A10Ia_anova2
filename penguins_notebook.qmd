@@ -26,7 +26,7 @@ Votre but est de mettre en évidence la différence de masse entre les trois esp
 
 Les données sont disponibles dans le package R {palmerpenguins}, `penguins`. Voir `?palmerpenguins::penguins` pour plus d'informations.
 
-L'analyse est réalisée avec le logiciel R (`r R.version.string`) et en particulier les packages {inferit} version `r packageVersion("inferit")` et {modelit} version `r packageVersion("modelit")` dans la [SciViews Box 2024](https://www.sciviews.org/software/svbox/). [Saturn Cloud](https://saturncloud.io/) (Linux Ubuntu 22.04) est utilisé pour exécuter le code et compiler la version HTML de ce bloc-notes.
+L'analyse est réalisée avec le logiciel R (`r R.version.string`) et en particulier les packages {inferit} version `r packageVersion("inferit")` et {modelit} version `r packageVersion("modelit")` dans la [SciViews Box 202](https://www.sciviews.org/software/svbox/)5. [Saturn Cloud](https://saturncloud.io/) (Linux Ubuntu 22.04) est utilisé pour exécuter le code et compiler la version HTML de ce bloc-notes.
 
 Le seuil $\alpha$ de tous les tests est fixé à l'avance à 5%.
 
@@ -36,6 +36,9 @@ Le seuil $\alpha$ de tous les tests est fixé à l'avance à 5%.
 # Ceci est nécessaire pour les tests SDD, ne pas utiliser dans un "vrai" projet
 if (!"tools:tests" %in% search())
   source(here::here("tests/tools_tests.R"), attach(NULL, name = "tools:tests"))
+
+# Configure Knitr to use AGG as graphic device
+knitr::opts_chunk$set(dev = "ragg_png")
 
 # Configuration de l'environnement SciViews::R
 SciViews::R("___", "___", lang = "fr")
@@ -99,7 +102,7 @@ select_answer(r"-{
 
 <!--% Réalisez un graphique de `peng` qui mette en évidence la comparaison des masses (y compris la moyenne) entre les trois espèces, également en fonction du  sexe, représenté sous forme de graphiques séparés. Représentez simultanément les boites de dispersion, les points et la moyenne. -->
 
-```{r pengplot, record='RNCS'}
+```{r pengplot, record='RNCS', arg='no.data'}
 peng %>.%
   ___(., ___ ~ ___) +
     ___() +
@@ -124,7 +127,7 @@ Le graphique des interactions nous permet d'avoir une première impression visue
 
 <!--% Créez le graphique des interactions à partir de `peng`. Vous avez deux possibilités : représenter les espèces en axe X et le sexe avec de la couleur ou l'inverse. Testez les deux et retenez le graphique qui s'avère le plus clair ici. -->
 
-```{r penginteraction, record='RNCS'}
+```{r penginteraction, record='RNCS', arg='no.data'}
 peng %>.%
   ___(., ___) %>.%
   ___(., moyenne = ___) %>.%
