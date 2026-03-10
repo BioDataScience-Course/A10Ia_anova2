@@ -30,19 +30,29 @@ L'analyse est réalisée avec le logiciel R (`r R.version.string`) et en particu
 
 Le seuil $\alpha$ de tous les tests est fixé à l'avance à 5%.
 
-## Résultats
-
 ```{r setup, include=FALSE}
 # Ceci est nécessaire pour les tests SDD, ne pas utiliser dans un "vrai" projet
 if (!"tools:tests" %in% search())
   source(here::here("tests/tools_tests.R"), attach(NULL, name = "tools:tests"))
 
-# Configure Knitr to use AGG as graphic device
+# Configure Knitr pour utiliser AGG comme périphérique graphique
 knitr::opts_chunk$set(dev = "ragg_png")
 
 # Configuration de l'environnement SciViews::R
-SciViews::R("___", "___", lang = "fr")
+SciViews::R("infer", "model", lang = "fr")
 ```
+
+<!--% Spécifier si vous avez employé l'intelligence artificielle dans votre projet. -->
+
+```{r ai_comment, output='asis'}
+select_answer(r"-{
+[] -   Ce document a été rédigé en étant assisté par l'Intelligence Artificielle.
+[] -   Ce document a été rédigé sans recours à l'Intelligence Artificielle.}-")
+```
+
+<!-- Précisez ci-dessous l'utilisation que vous avez faite de l'IA. Citez le modèle utilisé. -->
+
+## Résultats
 
 ### Analyse descriptive
 
@@ -152,7 +162,7 @@ Nous comparons les masses moyennes des trois espèces et des sexes à l'aide d'u
 
 ```{r penganova1, warning=FALSE, record='ROP', object='peng_lm', arg='terms'}
 ___(peng_lm <- ___(data = ___, ___ ~ ___)) %>.%
-  tabularise(.)
+  tabularise(., origdata = peng)
 ```
 
 ```{r penganova1comment, output='asis'}
@@ -179,7 +189,7 @@ ___(data = ___, ___ ~ interaction(___, ___))
 
 <!--% Vérifiez la distribution normale des résidus de votre modèle à l'aide du graphique adéquat. -->
 
-```{r pengresid1, record='RNP', arg='labels'}
+```{r pengresid1, record='RNCS', arg='no.data'}
 chart$___(___)
 ```
 
@@ -202,7 +212,7 @@ select_answer(r"-{
 peng <- ___(peng, species_sex = interaction(___, ___))
 # Anova à un facteur
 ___(peng_lm2 <- ___(data = peng, ___ ~ ___)) %>.%
-  tabularise(.)
+  tabularise(., origdata = peng)
 ```
 
 ```{r penganova2comment, output='asis'}
@@ -232,9 +242,19 @@ select_answer(r"-{
 
 ## Discussion et conclusions
 
-<!--% Concluez votre travail en trois phrases maximum. -->
+```{r pengdiscu_comment, output='asis'}
+select_answer(r"-{
+[] -  Les masses moyennes diffèrent significativement selon l’espèce et selon le sexe au seuil α = 5%.
+[] -  Les masses moyennes ne diffèrent pas significativement selon l’espèce ni selon le sexe au seuil α = 5%.
 
-...Votre discussion ici...
+[] -  Une interaction significative entre espèce et sexe est mise en évidence, rendant l’interprétation séparée des facteurs moins pertinente.
+[] -  Aucune interaction significative entre espèce et sexe n’est observée, les effets peuvent être interprétés séparément.
+
+[] -  Les comparaisons multiples indiquent que les Gentoo sont significativement plus lourds que les deux autres espèces, alors que Adelie et Chinstrap ne diffèrent pas significativement, et ce pour les deux sexes.
+[] -  Les comparaisons multiples montrent que seule l’espèce Chinstrap diffère significativement des deux autres.
+[] -  Les comparaisons multiples n’indiquent aucune différence significative entre les espèces.
+}-")
+```
 
 ## Références
 

@@ -33,19 +33,29 @@ L'analyse est réalisée avec le logiciel R (`r R.version.string`) et en particu
 
 Le seuil $\alpha$ de tous les tests est fixé à l'avance à 5%.
 
-## Résultats
-
 ```{r setup, include=FALSE}
 # Ceci est nécessaire pour les tests SDD, ne pas utiliser dans un "vrai" projet
 if (!"tools:tests" %in% search())
   source(here::here("tests/tools_tests.R"), attach(NULL, name = "tools:tests"))
 
-# Configure Knitr to use AGG as graphic device
+# Configure Knitr pour utiliser AGG comme périphérique graphique
 knitr::opts_chunk$set(dev = "ragg_png")
 
 # Configuration de l'environnement SciViews::R
 SciViews::R("___", "___", lang = "fr")
 ```
+
+<!--% Spécifier si vous avez employé l'intelligence artificielle dans votre projet. -->
+
+```{r ai_comment, output='asis'}
+select_answer(r"-{
+[] -   Ce document a été rédigé en étant assisté par l'Intelligence Artificielle.
+[] -   Ce document a été rédigé sans recours à l'Intelligence Artificielle.}-")
+```
+
+<!-- Précisez ci-dessous l'utilisation que vous avez faite de l'IA. Citez le modèle utilisé. -->
+
+## Résultats
 
 ### Étude descriptive
 
@@ -55,14 +65,14 @@ Voici un résumé des données ainsi qu'une représentation graphique après con
 
 ```{r oatsimport, record='RODFS', object='oats'}
 read("oats", package = "MASS") %>.%
-  sfilter(., V == "Golden.rain") %>.%
-  smutate(., 
-    block    = B,
-    variety  = droplevels(V),
-    nitrogen = as.ordered(round(0.1257 + (as.numeric(
-      stringr::str_remove_all(as.character(N), "cwt"))), 2)), 
-    yield    = 0.063 * Y) %>.%
-  sselect(., -B, -V, -N, -Y) %>.%
+  filter_(., ~ V == "Golden.rain") %>.%
+  mutate_(., 
+    block    = ~ B,
+    variety  = ~ droplevels(V),
+    nitrogen = ~ as.ordered(round(0.1257 + (as.numeric(
+     gsub("cwt", "", N, fixed = TRUE))), 2)), 
+    yield    = ~ 0.063 * Y) %>.%
+  select_(., ~ -c(B,V,N,Y)) %>.%
   labelise(., label = list(
       block    = "Parcelle",
       variety  = "Variété",
@@ -229,13 +239,24 @@ select_answer(r"-{
 [] -   La distribution des résidus est très mauvaise. Notre modèle n'est pas utilisable.}-")
 ```
 
+
 ## Discussion et conclusions
 
-<!--% Concluez votre travail en trois phrases maximum. Que pensez-vous de ce modèle ? -->
+```{r oatsdiscu_comment, output = 'asis'}
+select_answer(r"-{
+[] -  L'azote a un effet significatif sur le rendement de l'avoine (variété Golden rain) selon l’ANOVA au seuil α = 5%.
+[] -  L'azote n'a pas d'effet significatif sur le rendement de l'avoine (variété Golden rain) selon l’ANOVA au seuil α = 5%.
+[] -  Les résultats de l’ANOVA sont inconcluants et ne permettent pas de trancher.
 
-...Votre discussion ici...
+[] -  L'étude indique un effet essentiellement linéaire de l’azote sur le rendement, comme suggéré par les intervalles de confiance.
+[] -  L’étude indique un effet quadratique de l’azote sur le rendement.
+[] -  L’étude montre que l’effet de l’azote est négligeable.
 
-<!--# Notez que nous aurions également pu traiter `nitrogen` comme une variable numérique et effectuer une régression linéaire... nous étudierons cela l'an prochain. Il est aussi possible de réaliser un modèle plus complexe à 3 facteurs en étudiant aussi la variété d'avoine (toutes les données initiales, relatives à 3 variétés différentes). La formule de notre modèle s'écrit alors yield ~ nitrogen * variety + (variety | block) avec un effet bloc qui dépend aussi de la variété. Des simplifications sont envisageables s'il n'y a pas d'interactions => yield ~ nitrogen + variety + (variety | block), ou si l'effet de la variété ne dépend pas de la parcelle auquel cas on reviendrait à (1 | block) pour le terme aléatoire. -->
+[] -  L’effet bloc est significatif, ce qui confirme une variation non négligeable entre parcelles.
+[] -  L’effet bloc n’est pas significatif, les parcelles sont homogènes.
+[] -  L’effet bloc n’est pas interprétable dans ce type de modèle.
+}-")
+```
 
 ## Références
 
