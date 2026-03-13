@@ -87,12 +87,13 @@ peng <- ___(___)
 ```{r pengtab, warning=FALSE, record='RODFS', object='peng_tab'}
 peng %>.%
   ___(., ___) %>.%
+  unlabelise(., "body_mass") %>.%
   ___(.,
     moyenne  = ___,
     variance = ___,
     n        = ___) ->
   peng_tab
-  ___(___, auto.labs = FALSE)
+  ___(___)
 ```
 
 ```{r pengtabcomment, output='asis'}
@@ -259,3 +260,4 @@ select_answer(r"-{
 ## Références
 
 <!--% Ne rien indiquer ici. La référence bibliographique se placera automatiquement ici. -->
+

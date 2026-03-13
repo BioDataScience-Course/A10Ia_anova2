@@ -239,6 +239,7 @@ select_answer(r"-{
 [] -   La distribution des résidus est très mauvaise. Notre modèle n'est pas utilisable.}-")
 ```
 
+
 ## Discussion et conclusions
 
 ```{r oatsdiscu_comment, output = 'asis'}
