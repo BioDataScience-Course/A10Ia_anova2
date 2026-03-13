@@ -1,6 +1,6 @@
 Package: A10Ia_anova2
 Type: Package
-Version: 3.1.0
+Version: 3.2.0
 Title: Analyse de variance à deux facteurs
 Description: Projet individuel cadré du module 10 du cours SDD I à l'UMONS
 Authors@R: c(
